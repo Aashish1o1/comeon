@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>👥 Student Management</h1>
+        <p class="subtitle">Add or remove students from the system</p>
+
+        {% if success %}
+        <div class="alert alert-success">
+            {{ success }}
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="alert alert-error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <div class="form-container">
+            <h2>Add New Student</h2>
+            <form method="post" action="/addstudent" class="student-form">
+                <input type="text" name="student_id" placeholder="Student ID" required>
+                <input type="text" name="name" placeholder="Full Name" required>
+                <button type="submit" class="btn">+ Add Student</button>
+            </form>
+        </div>
+
+        <h2>Student List ({{ students|length }} students)</h2>
+        
+        {% if students %}
+        <table>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+            {% for s in students %}
+            <tr>
+                <td>{{ s.student_id }}</td>
+                <td>{{ s.name }}</td>
+                <td>
+                    <form method="post" action="/removestudent" class="inline-form" 
+                          onsubmit="return confirm('Are you sure you want to remove {{ s.name }}?');">
+                        <input type="hidden" name="student_id" value="{{ s.student_id }}">
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <div class="alert alert-error">
+            No students registered yet. Add your first student above!
+        </div>
+        {% endif %}
+
+        <div class="nav-buttons">
+            <a href="/">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

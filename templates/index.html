@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Attendance System</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <meta http-equiv="refresh" content="600">
+</head>
+<body>
+    <div class="container">
+        <h1>📱 QR Attendance System</h1>
+        <p class="subtitle">Scan the QR code to mark your attendance</p>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <h3>{{ stats.total }}</h3>
+                <p>Total Students</p>
+            </div>
+            <div class="stat-card">
+                <h3>{{ stats.present }}</h3>
+                <p>Present Today</p>
+            </div>
+            <div class="stat-card">
+                <h3>{{ stats.absent }}</h3>
+                <p>Absent Today</p>
+            </div>
+        </div>
+
+        <div class="qr-container">
+            <p style="font-weight: bold; color: #333; margin-bottom: 15px;">Current QR Code</p>
+            <img src="/qr?t={{ range(1000000, 9999999) | random }}" width="300" alt="QR Code">
+            <p class="refresh-info">⟳ QR code refreshes every 10 minutes</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="/scan">📲 Student Scan</a>
+            <a href="/dashboard">📊 View Dashboard</a>
+            <a href="/students">👥 Manage Students</a>
+        </div>
+    </div>
+</body>
+</html>
