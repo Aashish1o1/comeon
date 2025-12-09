@@ -109,7 +109,7 @@ uvicorn app:app --host 0.0.0.0 --port 10000
 
 Replace the API base URL in your mobile app after deployment.
 
-📡 API Endpoints
+ API Endpoints
 POST /scan
 
 Marks attendance when the scanner app submits:
